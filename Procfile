@@ -1,1 +1,1 @@
-web: gunicorn "app:fakebook.py()"
+web: gunicorn "app:fakebook.py"
