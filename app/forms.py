@@ -14,3 +14,10 @@ class SignInForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Sign In')
 
+class PostForm(FlaskForm):
+    body = StringField('Body', validators=[DataRequired()])
+    submit = SubmitField('Post')
+
+class SearchForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    submit = SubmitField('Seach User')

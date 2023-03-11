@@ -1,5 +1,5 @@
 from . import bp as social_bp 
-from app.models import User, Post
+from app.blueprints.social.models import User, Post
 from app.forms import PostForm, SearchForm
 from flask import redirect, render_template, url_for, flash,g
 from flask_login import login_required, current_user
