@@ -18,8 +18,10 @@ def user(username):
 @social_bp.post('/post')
 @login_required
 def post():
-    if g.post_form.validate_on_submit():
-        body = g.post_form.postfield.data
+    form = PostForm()
+    # if g.post_form.validate_on_submit():
+    if form.validate_on_submit():
+        body = form.body.data
         p = Post(body=body, user_id=current_user.id)
         p.commit()
         return redirect(url_for('social.user', username=current_user.username))
@@ -29,5 +31,5 @@ def post():
 def user_search():
     g.search_form=SearchForm()
     if g.search_form.validate_on_submit():
-        return redirect(url_for('social.user',username=g.search_form.user.data))
+        return redirect(url_for('social.user',username=g.search_form.username.data))
     return redirect(url_for('main.index'))

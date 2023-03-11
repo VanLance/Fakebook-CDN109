@@ -25,7 +25,10 @@
     {% endif %}
     {% endwith %}
     {% if current_user.is_authenticated %}
-    {% include 'post.jinja' %}
+    <div class="row">
+        <div class="col-6">{% include 'post.jinja' %}</div>
+        <div class="col-6">{% include 'search.jinja' %}</div>
+    </div>
     {% endif %}
     <h1>FakeBook CDN</h1>
     {% block content %}

@@ -8,8 +8,12 @@
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="/">Home</a>
         <a class="nav-link" href="{{ url_for('main.about') }}">About</a>
+        {% if current_user.is_anonymous %}
         <a class="nav-link" href="{{ url_for('auth.sign_in') }}">Sign In</a>
         <a class="nav-link" href="{{ url_for('auth.register')}}">Register</a>
+        {% else %}
+        <a class="nav-link" href="{{ url_for('auth.log_out')}}">Logout</a>
+        {% endif %}
       </div>
     </div>
   </div>

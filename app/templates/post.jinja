@@ -1,15 +1,11 @@
-{% block content %}
-<h2>Sign In</h2>
-    <form action="{{ url_for('social.post')}}" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.body.label }}<br>
-            {{ form.body(size=32) }}
-        </p>
-        
-        <p>
-            {{ form.submit(class='btn btn-primary') }}
-        </p>
-
-    </form>
-{% endblock %}
+<form action="{{ url_for('social.post')}}" method="post">
+    {{ post_form.hidden_tag() }}
+    <p>
+        {{ post_form.body.label }}<br>
+        {{ post_form.body(size=32) }}
+    </p>
+    
+    <p>
+        {{ post_form.submit(class='btn btn-primary') }}
+    </p>
+</form>

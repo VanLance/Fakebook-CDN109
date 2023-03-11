@@ -1,7 +1,8 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect,url_for
 from . import bp as app
 from app.forms import RegisterForm, SignInForm
 from app.blueprints.social.models import User
+from flask_login import login_user, logout_user
 
 @app.route('/')
 def index():
@@ -34,7 +35,7 @@ def register():
             u.hash_password(password)
             print(u.password_hash)
             u.commit()
-
+            login_user(u)
             flash(f'Register Requested for {email} {username}','success')
             return redirect('/')
     return render_template('register.jinja', form=form, title='Register')
@@ -43,6 +44,16 @@ def register():
 def sign_in():
     form = SignInForm()
     if form.validate_on_submit():
-        flash(f'{form.username} successfully signed in!')
-        return redirect('/')
+        username = form.username.data
+        password = form.password.data
+        user = User.query.filter_by(username=username).first()
+        if user and user.check_password(password):
+            login_user(user)
+            flash(f'{form.username} successfully signed in!')
+            return redirect('/')
     return render_template('signin.jinja', sign_in_form=form)
+
+@app.route('/logout')
+def log_out():
+    logout_user()
+    return redirect(url_for('main.index'))
