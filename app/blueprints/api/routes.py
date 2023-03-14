@@ -21,7 +21,9 @@ def api_posts():
 def user_posts(user):
     result = []
     user_match = User.query.filter_by(username=user).first()
-    user_posts= user_match.posts
+    if not user_match:
+        return make_response('User not Found', 404)
+    user_posts = user_match.posts
     for post in user_posts:
         result.append({
             'id': post.id,
